@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Array Operations</title>
+</head>
+
+<body>
+
+  <h2>Array Operations</h2>
+
+  Enter Array Size:
+  <input type="number" id="size">
+  <button onclick="setSize()">Set Size</button>
+
+  <div id="inputs"></div>
+
+  <div id="appendSection" style="display:none;">
+    Enter Value to Append:
+    <input type="text" id="append">
+    <button onclick="appendValue()">Append</button>
+  </div>
+
+  <p id="result"></p>
+
+  <button onclick="reset()">Reset</button>
+
+  <script>
+
+    let arr = [];
+    let size = 0;
+
+    function setSize() {
+
+      size = Number(document.getElementById("size").value);
+
+      if (!Number.isInteger(size) || size < 1) {
+        alert("Enter a valid array size");
+        return;
+      }
+
+      let output = "";
+
+      for (let i = 0; i < size; i++) {
+        output += "Enter Value " + (i + 1) + ": ";
+        output += '<input type="text" id="item' + i + '"><br><br>';
+      }
+
+      output += '<button onclick="createArray()">Create Array</button>';
+
+      document.getElementById("inputs").innerHTML = output;
+    }
+
+    function parseValue(value) {
+
+      value = value.trim();
+
+      if (value.startsWith("[") || value.startsWith("{")) {
+
+        try {
+          return JSON.parse(value);
+        }
+        catch (error) {
+          return value;
+        }
+      }
+
+      return value;
+    }
+
+    function createArray() {
+
+      arr = [];
+
+      for (let i = 0; i < size; i++) {
+
+        let value = document.getElementById("item" + i).value;
+
+        arr.push(parseValue(value));
+      }
+
+      document.getElementById("appendSection").style.display = "block";
+
+      displayArray();
+    }
+
+    function appendValue() {
+
+      let value = document.getElementById("append").value;
+
+      arr.push(parseValue(value));
+
+      document.getElementById("append").value = "";
+
+      displayArray();
+    }
+
+    function displayArray() {
+
+      let output = "Current Array:<br><br>";
+
+      for (let i = 0; i < arr.length; i++) {
+
+        output += "Index " + i + ": " + JSON.stringify(arr[i]);
+
+        output += "<br>Is Array: " + Array.isArray(arr[i]);
+
+        output += "<br><br>";
+      }
+
+      output += "Array Length: " + arr.length;
+
+      document.getElementById("result").innerHTML = output;
+    }
+
+    function reset() {
+
+      arr = [];
+      size = 0;
+
+      document.getElementById("size").value = "";
+      document.getElementById("inputs").innerHTML = "";
+      document.getElementById("append").value = "";
+      document.getElementById("appendSection").style.display = "none";
+      document.getElementById("result").innerHTML = "";
+
+    }
+
+  </script>
+
+</body>
+
+</html>

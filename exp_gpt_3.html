@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>String Operations</title>
+</head>
+
+<body>
+
+  <h2>String Operations</h2>
+
+  <h3>1. Reverse String</h3>
+
+  <input type="text" id="rev" placeholder="Enter a string">
+
+  <button onclick="reverse()">Reverse</button>
+  <button onclick="reset1()">Reset</button>
+
+  <p id="out1"></p>
+
+  <hr>
+
+  <h3>2. Replace Characters</h3>
+
+  <input type="text" id="str" placeholder="Original string">
+  <input type="text" id="old" placeholder="Old character">
+  <input type="text" id="new" placeholder="New character">
+
+  <button onclick="replace()">Replace</button>
+  <button onclick="reset2()">Reset</button>
+
+  <p id="out2"></p>
+
+  <hr>
+
+  <h3>3. Check Palindrome</h3>
+
+  <input type="text" id="pal" placeholder="Enter a string">
+
+  <button onclick="palindrome()">Check</button>
+  <button onclick="reset3()">Reset</button>
+
+  <p id="out3"></p>
+
+  <script>
+
+    // Reverse String
+    function reverse() {
+
+      let s = document.getElementById("rev").value;
+      let r = "";
+
+      for (let i = s.length - 1; i >= 0; i--) {
+        r += s[i];
+      }
+
+      document.getElementById("out1").innerText = "Reversed String: " + r;
+    }
+
+    function reset1() {
+      document.getElementById("rev").value = "";
+      document.getElementById("out1").innerText = "";
+    }
+
+
+    // Replace Characters
+    function replace() {
+
+      let s = document.getElementById("str").value;
+      let a = document.getElementById("old").value;
+      let b = document.getElementById("new").value;
+
+      if (a.length != 1 || b.length != 1) {
+        document.getElementById("out2").innerText = "Enter only one character.";
+        return;
+      }
+
+      if (!s.includes(a)) {
+        document.getElementById("out2").innerText = "Character not found.";
+        return;
+      }
+
+      let r = s.split(a).join(b);
+
+      document.getElementById("out2").innerText = "Replaced String: " + r;
+    }
+
+    function reset2() {
+      document.getElementById("str").value = "";
+      document.getElementById("old").value = "";
+      document.getElementById("new").value = "";
+      document.getElementById("out2").innerText = "";
+    }
+
+
+    // Check Palindrome
+    function palindrome() {
+
+      let s = document.getElementById("pal").value.toLowerCase();
+      let clean = "";
+
+      for (let i = 0; i < s.length; i++) {
+        if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= '0' && s[i] <= '9')) {
+          clean += s[i];
+        }
+      }
+
+      let rev = "";
+
+      for (let i = clean.length - 1; i >= 0; i--) {
+        rev += clean[i];
+      }
+
+      if (clean.length > 0 && clean == rev) {
+        document.getElementById("out3").innerText = "Palindrome";
+      }
+      else {
+        document.getElementById("out3").innerText = "Not a Palindrome";
+      }
+    }
+
+    function reset3() {
+      document.getElementById("pal").value = "";
+      document.getElementById("out3").innerText = "";
+    }
+
+  </script>
+
+</body>
+
+</html>

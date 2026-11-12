@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Student Registration Form</title>
+</head>
+
+<body>
+
+  <div id="mainContainer">
+
+    <h2>Student Registration</h2>
+
+    <form id="studentForm" onsubmit="return validateForm()" onreset="clearError()">
+
+      Full Name:
+      <input type="text" id="name" required>
+      <br><br>
+
+      Address:
+      <input type="text" id="address" required>
+      <br><br>
+
+      City:
+      <input type="text" id="city" required>
+      <br><br>
+
+      State:
+      <input type="text" id="state" required>
+      <br><br>
+
+      Pin Code:
+      <input type="text" id="pin" maxlength="6" required>
+      <br><br>
+
+      Gender:
+      <select id="gender" required>
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+      <br><br>
+
+      Mobile Number:
+      <input type="text" id="mobile" maxlength="10" required>
+      <br><br>
+
+      Email ID:
+      <input type="email" id="email" required>
+      <br><br>
+
+      <p id="error"></p>
+
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+
+      let name = document.getElementById("name").value.trim();
+      let city = document.getElementById("city").value.trim();
+      let state = document.getElementById("state").value.trim();
+      let pin = document.getElementById("pin").value.trim();
+      let mobile = document.getElementById("mobile").value.trim();
+      let email = document.getElementById("email").value.trim();
+
+      let error = document.getElementById("error");
+
+      error.innerHTML = "";
+
+      if (!/^[a-zA-Z\s]+$/.test(name)) {
+        error.innerHTML = "Enter a valid name.";
+        return false;
+      }
+
+      if (!/^[a-zA-Z\s]+$/.test(city)) {
+        error.innerHTML = "Enter a valid city.";
+        return false;
+      }
+
+      if (!/^[a-zA-Z\s]+$/.test(state)) {
+        error.innerHTML = "Enter a valid state.";
+        return false;
+      }
+
+      if (!/^[0-9]{6}$/.test(pin)) {
+        error.innerHTML = "Enter a valid 6-digit PIN code.";
+        return false;
+      }
+
+      if (!/^[6-9][0-9]{9}$/.test(mobile)) {
+        error.innerHTML = "Enter a valid 10-digit mobile number.";
+        return false;
+      }
+
+      if (!/^[a-zA-Z0-9._%+-]+@(gmail|yahoo|hotmail)\.com$/i.test(email)) {
+        error.innerHTML = "Enter a valid Gmail, Yahoo or Hotmail ID.";
+        return false;
+      }
+
+      document.getElementById("mainContainer").innerHTML =
+        "<h2>Congratulations!</h2>" +
+        "<p>Your information has been validated successfully.</p>" +
+        "<button onclick='location.reload()'>Go Back</button>";
+
+      return false;
+    }
+
+    function clearError() {
+      document.getElementById("error").innerHTML = "";
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Area Calculator</title>
+</head>
+<body>
+  <h2>Area Calculator</h2>
+  <h3> Triangle Area</h3>
+  
+  Side 1:<input type="number" id = "side1"><br><br>
+  Side 2:<input type="number" id = "side2"><br><br>
+  Side 3:<input type="number" id = "side3"><br><br>
+
+  <button onclick ="calculateTriangleArea()"> Area</button>
+  <button onclick = "resetTriangleArea()">Reset</button>
+
+  <p id ="Triangleresult"></p>
+
+  <hr>
+
+  <h3>Rectangle Area</h3>
+
+  Length: <input type="number" id ="length"><br><br>
+  Width:<input type ="number" id ="width"><br><br>
+
+  <button onclick="calculateRectangleArea()">Area</button>
+  <button onclick="resetRectangleArea()">Reset</button>
+
+  <p id = "Rectangleresult"></p>
+
+  <hr>
+
+  <h3>Circle Area</h3>
+
+  Radius:<input type = number id = "radius"><br><br>
+
+  <button onclick="calculateCircleArea()">Area</button>
+  <button onclick = "resetCircleArea()">Reset</button>
+  
+  <p id = "Circleresult"></p>
+
+  <hr>
+
+  <script>
+    //Traingle
+    function calculateTriangleArea(){
+
+      let a = parseFloat(document.getElementById("side1").value);
+      let b= parseFloat(document.getElementById("side2").value);
+      let c = parseFloat(document.getElementById("side3").value);
+
+      if(isNaN(a) || isNaN(b)|| isNaN(c)){
+        document.getElementById("Triangleresult").innerHTML="Please Enter a value";
+        return;
+      }
+      if(a<=0||b<=0||c<=0){
+        document.getElementById("Triangleresult").innerHTML="Enter positive integer";
+        return;
+      }
+      if(a+b<=c|| b+c <= a ||a+c<=b){
+       document.getElementById("Triangleresult").innerHTML="This Values Cant make a triangle";
+       return;
+      }
+      let s = (a+b+c)/2;
+      let Area =Math.sqrt(s*(s-a)*(s-b)*(s-c));
+      
+      document.getElementById("Triangleresult").innerHTML="Traingle Area "+Area.toFixed(2);
+
+    }
+    function resetTriangleArea(){
+      document.getElementById("side1").value="";
+      document.getElementById("side2").value="";
+      document.getElementById("side3").value="";
+
+      document.getElementById("Triangleresult").innerHTML="";
+         
+    }
+
+    function calculateRectangleArea(){
+      let l = parseFloat(document.getElementById("length").value);
+      let w = parseFloat(document.getElementById("width").value);
+      
+      
+
+      if (isNaN(l) || isNaN(w) ) {
+        document.getElementById("Rectangleresult").innerHTML = "Please Enter a value";
+        return;
+      }
+      if (l <= 0 || w <= 0 ) {
+        document.getElementById("Rectangleresult").innerHTML = "Enter positive integer";
+        return;
+      }
+
+      let Area = l * w;
+
+      document.getElementById("Rectangleresult").innerHTML="Rectangle Area "+ Area.toFixed(2);
+    
+    }
+
+    function resetRectangleArea(){
+      document.getElementById("length").value ="";
+      document.getElementById("width").value = "";
+      document.getElementById("Rectangleresult").innerHTML = "";
+    }
+
+    function calculateCircleArea(){
+      let r = parseFloat(document.getElementById("radius").value);
+
+      if (isNaN(r)) {
+        document.getElementById("Circleresult").innerHTML = "Please Enter a value";
+        return;
+      }
+      if (r <= 0 ) {
+        document.getElementById("Circleresult").innerHTML = "Enter positive integer";
+        return;
+      }
+
+      let Area = Math.PI*r*r;
+      document.getElementById("Circleresult").innerHTML="Circle Area " + Area.toFixed(2);
+    }
+
+    function resetCircleArea() {
+        document.getElementById("radius").value = "";
+        document.getElementById("Circleresult").innerHTML = "";
+      }
+    
+  </script>
+</body>
+</html>

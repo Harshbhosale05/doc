@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Array Operations</title>
+</head>
+
+<body>
+
+  <h2>Array Operations</h2>
+
+  <p>Original Array:</p>
+  <p id="originalArray"></p>
+
+  Enter Element to Remove:
+  <input type="text" id="removeElement">
+  <button onclick="removeElement()">Remove Element</button>
+  <br><br>
+
+  Enter Element to Search:
+  <input type="text" id="searchElement">
+  <button onclick="checkElement()">Search Element</button>
+  <br><br>
+
+  <button onclick="emptyUsingNewArray()">Empty Array</button>
+  <button onclick="resetArray()">Reset</button>
+
+  <p id="result"></p>
+
+  <script>
+    let originalArr = ["Apple", "Banana", "Mango", "Orange", "Grapes"];
+    let arr = [...originalArr];
+
+    document.getElementById("originalArray").innerHTML = arr.join(", ");
+
+    function removeElement() {
+      let element = document.getElementById("removeElement").value;
+      let index = arr.indexOf(element);
+
+      if (index != -1) {
+        arr.splice(index, 1);
+        document.getElementById("result").innerHTML =
+          "Element Removed: " + element + "<br>" +
+          "Updated Array: " + arr.join(", ");
+      }
+      else {
+        document.getElementById("result").innerHTML = "Element not found.";
+      }
+    }
+
+    function checkElement() {
+      let element = document.getElementById("searchElement").value;
+
+      if (arr.includes(element)) {
+        document.getElementById("result").innerHTML = element + " is present in the array.";
+      }
+      else {
+        document.getElementById("result").innerHTML = element + " is not present in the array.";
+      }
+    }
+
+    function emptyUsingNewArray() {
+      arr = [];
+      document.getElementById("result").innerHTML = "Array emptied: [" + arr.join(", ") + "]";
+    }
+
+    function resetArray() {
+      arr = [...originalArr];
+
+      document.getElementById("removeElement").value = "";
+      document.getElementById("searchElement").value = "";
+      document.getElementById("originalArray").innerHTML = arr.join(", ");
+      document.getElementById("result").innerHTML = "Array Reset Successfully!";
+    }
+  </script>
+
+</body>
+
+</html>

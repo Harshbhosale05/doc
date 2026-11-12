@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Multiplication Table</title>
+</head>
+
+<body>
+
+  <h2>Multiplication Table</h2>
+
+  Enter Number:
+  <input type="number" id="number">
+
+  <br><br>
+
+  Enter Limit:
+  <input type="number" id="limit">
+
+  <br><br>
+
+  <button onclick="generateTable('for')">For Loop</button>
+
+  <button onclick="generateTable('while')">While Loop</button>
+
+  <button onclick="generateTable('doWhile')">Do While Loop</button>
+
+  <button onclick="resetTable()">Reset</button>
+
+  <br><br>
+
+  <div id="result"></div>
+
+  <script>
+
+    function generateTable(loopType) {
+
+      let number = parseInt(document.getElementById("number").value);
+      let limit = parseInt(document.getElementById("limit").value);
+
+      let result = document.getElementById("result");
+
+      if (isNaN(number) || isNaN(limit)) {
+        result.innerHTML = "Please enter both number and limit.";
+        return;
+      }
+
+      if (limit < 1) {
+        result.innerHTML = "Limit must be greater than 0.";
+        return;
+      }
+
+      let output = "";
+
+      // For Loop
+      if (loopType == "for") {
+
+        for (let i = 1; i <= limit; i++) {
+          output += number + " x " + i + " = " + (number * i) + "<br>";
+        }
+
+      }
+
+      // While Loop
+      else if (loopType == "while") {
+
+        let i = 1;
+
+        while (i <= limit) {
+          output += number + " x " + i + " = " + (number * i) + "<br>";
+          i++;
+        }
+
+      }
+
+      // Do While Loop
+      else if (loopType == "doWhile") {
+
+        let i = 1;
+
+        do {
+          output += number + " x " + i + " = " + (number * i) + "<br>";
+          i++;
+        } while (i <= limit);
+
+      }
+
+      result.innerHTML = output;
+
+    }
+
+    function resetTable() {
+
+      document.getElementById("number").value = "";
+      document.getElementById("limit").value = "";
+      document.getElementById("result").innerHTML = "";
+
+    }
+
+  </script>
+
+</body>
+
+</html>

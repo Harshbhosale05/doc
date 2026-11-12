@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mouse and Focus Events</title>
+</head>
+
+<body>
+
+  <h1>Change Background Color</h1>
+
+  <div onmouseover="mouseOver()" onmouseleave="mouseLeave()">
+    Move mouse here
+  </div>
+
+  <br>
+
+  <input type="text" placeholder="Click here" onfocus="focusEvent()" onblur="blurEvent()">
+
+  <p id="message">Waiting for an event...</p>
+  <button onclick="changeColor()">Change Background</button>
+  <button onclick="resetPage()">Reset</button>
+
+  <script>
+    function mouseOver() {
+      document.body.style.backgroundColor = "pink";
+      document.getElementById("message").innerText = "Mouse Hover Event!";
+    }
+
+    function mouseLeave() {
+      document.body.style.backgroundColor = "white";
+      document.getElementById("message").innerText = "Mouse Leave Event!";
+    }
+
+    function focusEvent() {
+      document.body.style.backgroundColor = "orange";
+      document.getElementById("message").innerText = "Focus Event!";
+    }
+
+    function blurEvent() {
+      document.body.style.backgroundColor = "lightgreen";
+      document.getElementById("message").innerText = "Blur Event!";
+    }
+    function changeColor() {
+      document.body.style.backgroundColor = "lavender";
+      document.getElementById("message").innerHTML = "Background Changed using Button!";
+    }
+
+    function resetPage() {
+      document.body.style.backgroundColor = "white";
+      document.getElementById("message").innerText = "Waiting for an event...";
+      document.activeElement.blur();
+    }
+  </script>
+
+</body>
+
+</html>

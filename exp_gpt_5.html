@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Countdown Timer</title>
+</head>
+
+<body>
+
+  <h1>Countdown Timer</h1>
+1
+  <label>Set End Date and Time:</label>
+  <br><br>
+
+  <input type="datetime-local" id="endDate">
+  <br><br>
+
+  <button onclick="startCountdown()">Start Countdown</button>
+  <button onclick="resetCountdown()">Reset</button>
+
+  <p id="result"></p>
+
+  <script>
+    let timer;
+
+    function startCountdown() {
+      let input = document.getElementById("endDate").value;
+      let result = document.getElementById("result");
+      let end = new Date(input).getTime();
+
+      if (input == "" || isNaN(end)) {
+        result.innerText = "Please select a valid end date and time.";
+        return;
+      }
+
+      clearInterval(timer);
+
+      function update() {
+        let d = end - Date.now();
+
+        if (d <= 0) {
+          clearInterval(timer);
+          timer = null;
+          result.innerText = "EXPIRED";
+          return;
+        }
+
+        let days = Math.floor(d / 86400000);
+        let hours = Math.floor(d % 86400000 / 3600000);
+        let minutes = Math.floor(d % 3600000 / 60000);
+        let seconds = Math.floor(d % 60000 / 1000);
+
+        result.innerText = days + "d " + hours + "h " +
+          minutes + "m " + seconds + "s";
+      }
+
+      update();
+      timer = setInterval(update, 1000);
+    }
+
+    function resetCountdown() {
+      clearInterval(timer);
+      timer = null;
+      document.getElementById("endDate").value = "";
+      document.getElementById("result").innerText = "";
+    }
+  </script>
+
+</body>
+
+</html>
